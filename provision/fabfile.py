@@ -36,7 +36,6 @@ def setup_all():
 
 def japanize():
 	# change locale
-	sudo("apt-get install -y language-pack-ja ibus-mozc", pty=False)
 	sudo("update-locale LANG=ja_JP.UTF-8")
 	# change timezone
 	sudo("mv /etc/localtime{,.org}")
