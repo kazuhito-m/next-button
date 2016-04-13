@@ -67,10 +67,38 @@ func TestGetCalenderInfoJson(t *testing.T) {
 
 // カレンダーAPいから取り出したCSVから構造体の配列へ変換する
 func TestConvDateInfosByCsv(t *testing.T) {
+
 	actual := ConvDateInfosByCsv(Testcsv)
+
+	// 件数確認
 	if len(actual) != 31 {
-		t.Errorf("ConvDateInfosByCsv() is faild.")
+		t.Errorf("ConvDateInfosByCsv() is faild. record count fail.")
 	}
+
+	// 一件目の特徴
+	di := actual[0]
+	if !di.Date.Equal(time.Date(2010, 1, 1, 0, 0, 0, 0, time.Local)) {
+		t.Errorf("ConvDateInfosByCsv() is faild. first record day not equals.")
+	}
+	if di.DayNoOfWeek != 5 {
+		t.Errorf("ConvDateInfosByCsv() is faild. first record weekday not equals.")
+	}
+	if !di.SpecialDay {
+		t.Errorf("ConvDateInfosByCsv() is faild. first record SpecialDay not equals.")
+	}
+
+	// 最終件の特徴
+	di = actual[30]
+	if !di.Date.Equal(time.Date(2010, 1, 31, 0, 0, 0, 0, time.Local)) {
+		t.Errorf("ConvDateInfosByCsv() is faild. last record day not equals.")
+	}
+	if di.DayNoOfWeek != 0 {
+		t.Errorf("ConvDateInfosByCsv() is faild. last record weekday not equals.")
+	}
+	if di.SpecialDay {
+		t.Errorf("ConvDateInfosByCsv() is faild. last record SpecialDay not equals.")
+	}
+
 }
 
 // 日付だけ比較。同じになる場合
