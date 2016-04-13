@@ -73,6 +73,7 @@ func TestConvDateInfosByCsv(t *testing.T) {
 	}
 }
 
+// 日付だけ比較。同じになる場合
 func TestEqualDateOnly(t *testing.T) {
 
 	t1 := time.Date(2014, 12, 20, 0, 0, 0, 0, time.Local)
@@ -82,6 +83,19 @@ func TestEqualDateOnly(t *testing.T) {
 
 	if !actual {
 		t.Errorf("EqualDateOnly() is faild.")
+	}
+}
+
+// 日付だけ比較。異なる場合
+func TestEqualDateOnlyNotEqual(t *testing.T) {
+
+	t1 := time.Date(2014, 12, 20, 23, 59, 58, 0, time.Local)
+	t2 := time.Date(2014, 12, 21, 0, 0, 0, 0, time.Local)
+
+	actual := EqualDateOnly(t1, t2)
+
+	if actual {
+		t.Errorf("EqualDateOnly() no2 is faild.")
 	}
 }
 
