@@ -4,3 +4,49 @@
 
 ## ボタン(RsPIのテクニック)
 
+## golang
+
+### 言語自体の話
+
+- [基礎知識](http://www.geocities.jp/m_hiroi/golang/abcgo01.html)
+- [言語仕様](http://golang.jp/go_spec#Constant_declarations)
+- [Goコードの書き方](http://golang-jp.org/doc/code.html)
+- [golang自体のソース(書き方の模範に)](https://golang.org/src/)
+- [構造体の話](http://qiita.com/cotrpepe/items/b8e7f70f27813a846431)
+- [型キャストの原則](http://qiita.com/atsaki/items/3554f5a0609c59a3e10d)
+- [リフレクションのマニュアル](https://golang.org/pkg/reflect/#Value.Convert)
+- [配列の要素数を取得する](http://ashitani.jp/golangtips/tips_slice.html#slice_Count)
+
+### テスト周り
+
+- [golangにおけるテストの考え方](http://qiita.com/Jxck_/items/8717a5982547cfa54ebc)
+
+### 文字列操作系
+
+- [stringsパッケージ](http://golang.jp/pkg/strings)
+- [golangで日本語（マルチバイト）の文字列を数える](http://qiita.com/reiki4040/items/b82bf5056ee747dcf713)
+
+### 日付まわり
+
+- [日付関係一般](http://qiita.com/taizo/items/acbee530bd33c803dab4#2%E3%81%A4%E3%81%AE%E6%99%82%E5%88%BB%E3%82%92%E6%AF%94%E8%BC%83%E3%81%99%E3%82%8B)
+- [日付だけ取り出す](http://qiita.com/umisama/items/b50df4888665fc36346e)
+
+### 通信系
+
+- [Goでhttpリクエストを送信する方法](http://qiita.com/taizo/items/c397dbfed7215969b0a5)
+
+### CSV周り
+
+- [csv分解](http://www.laddy.info/2014/09/28000/)
+
+## 外部API関連
+
+- [時刻表検索サイト(APIではないがスクレイピング対象)](http://www.ekikara.jp/top.htm)
+- [カレンダーAPI](http://calendar-service.net/api.php)
+
+---
+
+- []()
+- []()
+- []()
+- []()
