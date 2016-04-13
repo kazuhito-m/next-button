@@ -65,7 +65,7 @@ func ConvDateInfosByCsv(csvText string) []DateInfo {
 		year, _ := strconv.Atoi(record[0])
 		mon, _ := strconv.Atoi(record[1])
 		day, _ := strconv.Atoi(record[2])
-		dayNoOfWeek , _ := strconv.Atoi(record[6])
+		dayNoOfWeek, _ := strconv.Atoi(record[6])
 		date := time.Date(year, time.Month(mon), day, 0, 0, 0, 0, time.Local)
 		// 構造体作成
 		ti := DateInfo{}
@@ -76,4 +76,16 @@ func ConvDateInfosByCsv(csvText string) []DateInfo {
 		dateInfos = append(dateInfos, ti)
 	}
 	return dateInfos
+}
+
+
+// 日付から時刻を取り去る
+func TruncateHms(src time.Time) time.Time {
+	return src.Truncate(time.Hour).Add(- time.Duration(src.Hour()) * time.Hour)
+
+}
+
+// ２つの時刻変数の日付だけを取り出して同一か判定する
+func EqualDateOnly(src time.Time, dest time.Time) bool {
+	return TruncateHms(src).Equal(TruncateHms(dest))
 }

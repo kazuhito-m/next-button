@@ -47,7 +47,7 @@ const Testcsv string = `年,月,日,年号,和暦,曜日,曜日番号,祝日名
 func TestMakeApiUrlByDate(t *testing.T) {
 	targetDate := time.Date(2001, 12, 31, 0, 0, 0, 0, time.Local)
 	actual := MakeApiUrlByDate(targetDate)
-	if !strings.Contains(actual, "start_year=2001") || !strings.Contains(actual , "start_mon=12") {
+	if !strings.Contains(actual, "start_year=2001") || !strings.Contains(actual, "start_mon=12") {
 		t.Log("作成したURL")
 		t.Log(actual)
 		t.Errorf("MakeApiUrlByDate() is faild.")
@@ -72,3 +72,16 @@ func TestConvDateInfosByCsv(t *testing.T) {
 		t.Errorf("ConvDateInfosByCsv() is faild.")
 	}
 }
+
+func TestEqualDateOnly(t *testing.T) {
+
+	t1 := time.Date(2014, 12, 20, 0, 0, 0, 0, time.Local)
+	t2 := time.Date(2014, 12, 20, 23, 59, 59, 0, time.Local)
+
+	actual := EqualDateOnly(t1, t2)
+
+	if !actual {
+		t.Errorf("EqualDateOnly() is faild.")
+	}
+}
+
