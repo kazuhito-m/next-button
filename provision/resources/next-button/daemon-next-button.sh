@@ -30,15 +30,18 @@ while true ; do
   # インターバルスリープ
   sleep ${INTERVAL_SEC}
   # ボタンのステータスを取得
-  last_button_status=`cat ${STATUS_FILE}`
   now_button_status=`cat ${GPIO_VALUE}`
-  echo ${now_button_status} > ${STATUS_FILE}
-  # 0->1へ変化した時のみ
-  if [[ ${last_button_status} != ${now_button_status} ]] && [[ ${now_button_status} = 1 ]] ; then
-    date >> ${LOG_FILE}
+  # 変化していたら
+  if [[ ${last_button_status} != ${now_button_status} ]] ; then
+    echo ${now_button_status} > ${STATUS_FILE}
+    last_button_status=${now_button_status}
+    # 0->1へ変化した時のみ
+    if [[ ${now_button_status} = 1 ]] ; then
+      date >> ${LOG_FILE}
       echo "異なった場合のルーチンに入ってきている : ${now_button_status}" >>  ${LOG_FILE}
-    # 「実際に行いたい処理」のスクリプトを
-    ${BUTTUN_EVENT}
+      # 「実際に行いたい処理」のスクリプトを
+      ${BUTTUN_EVENT}
+    fi
   fi
 done
 
