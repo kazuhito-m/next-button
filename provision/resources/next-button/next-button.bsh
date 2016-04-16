@@ -13,8 +13,18 @@ TMP_TEXT_FILE=/tmp/next-button.txt
 
 # golang製のプログラムを叩く。
 function get-webinfo() {
-	${LIB_DIR}/next-button > ${TMP_TEXT_FILE}
-	return $?
+	# ネットから時刻と列車データ取得処理
+        ${LIB_DIR}/next-button > ${TMP_TEXT_FILE}
+        res=$?
+        # 結果判定
+        if [ $res -ne  0 ]; then
+                echo "a" | readalound_text.bsh
+                return $res
+        else
+                # 結果値を
+                readalound_text.bsh < ${TMP_TEXT_FILE}
+                return $?
+        fi
 }
 
 # 開始時チャイムを鳴らす
@@ -23,15 +33,7 @@ aplay ${LIB_DIR}/chime.wav &
 get-webinfo
 res=$?
 
-wait
+wait # 並列で実行する(理論上、処理が早ければ音が重なるが、まー遅いのでそんなことことはおこらない。)
 
-# 結果判定
-if [ $res -ne 0 ]; then
-	echo "情報の取得に失敗しました。" | readalound_text.bsh
-	exit $res
-fi
+exit $res
 
-# 結果値を
-readalound_text.bsh < ${TMP_TEXT_FILE}
-
-exit 0
