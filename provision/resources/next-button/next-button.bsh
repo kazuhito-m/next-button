@@ -8,6 +8,7 @@
 
 # 自身のスクリプトのパスを取得する。
 CUR_DIR=$(cd $(dirname $0);pwd)
+LIB_DIR=/usr/local/next-button
 TMP_TEXT_FILE=/tmp/next-button.txt
 
 function get-webinfo() {
@@ -16,16 +17,17 @@ function get-webinfo() {
 }
 
 # 開始時チャイムを鳴らす
-aplay chime.wav &
+aplay ${LIB_DIR}/chime.wav &
 # 実際の情報取得コマンド
 get-webinfo
+res=$?
 
 wait
 
 # 結果判定
-if [ $? -ne 0 ]; then
-	echo "情報の取得にしっぱいしました。" | readalound_text.bsh	
-	return $?
+if [ $res -ne 0 ]; then
+	echo "情報の取得に失敗しました。" | readalound_text.bsh
+	exit $res
 fi
 
 

@@ -1,18 +1,18 @@
 #coding:utf-8
 from fabric.api import local, run, sudo, put, env
 from fabric.context_managers import cd
+from fabric.contrib.project import rsync_project
 
 # 
 # RaspberryPI セットアップ・プロビジョニングソース
 # 
-# 
-#
 def setup_all():
 #	all_upgrade()
 #	japanize()
-	install_openjtalk()
+#	install_openjtalk()
+	basic_tools_setup()
+	install_nextbutton()
 	# rename_home_template_dirs()
-	# basic_tools_setup()
 	# install_common_tools()
 	# install_network_tools()
 	# install_modan_fonts()
@@ -55,12 +55,7 @@ def rename_home_template_dirs():
 	run("find ~/ -maxdepth 1 -type d  | LANG=C grep  -v '^[[:cntrl:][:print:]]*$' | xargs rm -rf")
 
 def basic_tools_setup():
-	# sudo("apt-get install -y curl nautilus-dropbox nautilus-open-terminal nautilus-actions ca-certificates openssl unity-tweak-tool" , pty=False)
-	sudo("apt-get install -y curl nautilus-dropbox nautilus-actions ca-certificates openssl nkf cifs-utils unity-tweak-tool" , pty=False)
-
-def install_common_tools():
-	sudo("apt-get install -f -y stopwatch convmv incron indicator-multiload tree indicator-multiload clipit freemind xbacklight byobu pandoc", pty=False)
-
+	sudo("apt-get install -y rsync" , pty=False)
 def install_network_tools():
 	sudo("apt-get install -y wireshark", pty=False)
 
@@ -293,3 +288,15 @@ def install_openjtalk():
 		sudo("mv /tmp/readalound_text.bsh /usr/local/bin/readalound_text.bsh")
 		sudo("chmod 755 /usr/local/bin/readalound_text.bsh")
 	run("rm -rf ./work")
+def install_nextbutton():
+	sudo("rm -rf /usr/local/next-button/")
+	sudo("rm -rf /usr/local/bin/next-button")
+	rsync_project(
+		local_dir="./resources/next-button",
+		remote_dir="/tmp",
+		exclude=[],
+		delete=True
+	)
+	sudo("mv /tmp/next-button/ /usr/local/next-button/")
+	sudo("chmod 755 /usr/local/next-button/next-button.bsh")
+	sudo("ln -s /usr/local/next-button/next-button.bsh /usr/local/bin/next-button")
