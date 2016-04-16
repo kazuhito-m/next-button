@@ -315,8 +315,9 @@ def build_install_golang():
 	run("tar -C /tmp -xzf /tmp/go.tar.gz")
 	sudo("mv /tmp/go /usr/local/go")
 	sudo("ln -s /usr/local/go/bin/go /usr/local/bin/go")
-	put("./resources/bashrc_append.txt","/tmp/bashrc_append.txt")
-	run("cat /tmp/bashrc_append.txt >> ~/.bashrc")
+	# 最終的に、以下は「実行時指定する」から要らないのでは？ TODO サラで入れるときに検証してみる
+#	put("./resources/bashrc_append.txt","/tmp/bashrc_append.txt")
+#	run("cat /tmp/bashrc_append.txt >> ~/.bashrc")
 def build_nextbutton():
 	run("rm -rf ./go")
 	run("mkdir -p ./go/src/github.com/kazuhito-m")
