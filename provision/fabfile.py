@@ -318,12 +318,12 @@ def build_install_golang():
 	put("./resources/bashrc_append.txt","/tmp/bashrc_append.txt")
 	run("cat /tmp/bashrc_append.txt >> ~/.bashrc")
 def build_nextbutton():
-#	run("rm -rf ./next-button")
-#	run("git clone https://github.com/kazuhito-m/next-button.git")
-	with cd("./next-button"):
-		run("env")
-		run("go env")
-#		run("go build", pty=True)
-#		run("chmod 755 ./next-button")
-#	sudo("cp ./next-button/next-button /usr/local/next-button/next-button")
+	run("rm -rf ./go")
+	run("mkdir -p ./go/src/github.com/kazuhito-m")
+	run("git clone https://github.com/kazuhito-m/next-button.git ./go/src/github.com/kazuhito-m/next-button")
+	with cd("./go/src/github.com/kazuhito-m/next-button"):
+		run("GOPATH=~/go go get", pty=True)
+		run("GOPATH=~/go go build", pty=True)
+		run("chmod 755 ./next-button")
+		sudo("cp ./next-button /usr/local/next-button/next-button")
 
