@@ -1,4 +1,7 @@
 #!/bin/bash
+
+source ~/.bashrc
+
 # 依存性解決のgo get(ソースから自動解決)
 go get
 # テスト

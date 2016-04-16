@@ -3,6 +3,8 @@ from fabric.api import local, run, sudo, put, env
 from fabric.context_managers import cd
 from fabric.contrib.project import rsync_project
 
+env.shell="bash -c "
+
 # 
 # RaspberryPI セットアップ・プロビジョニングソース
 # 
@@ -12,7 +14,8 @@ def setup_all():
 #	install_openjtalk()
 #	basic_tools_setup()
 #	install_nextbutton()
-	build_install_golang()
+#	build_install_golang()
+	build_nextbutton()
 	# rename_home_template_dirs()
 	# install_common_tools()
 	# install_network_tools()
@@ -56,7 +59,7 @@ def rename_home_template_dirs():
 	run("find ~/ -maxdepth 1 -type d  | LANG=C grep  -v '^[[:cntrl:][:print:]]*$' | xargs rm -rf")
 
 def basic_tools_setup():
-	sudo("apt-get install -y rsync" , pty=False)
+	sudo("apt-get install -y rsync git" , pty=False)
 def install_network_tools():
 	sudo("apt-get install -y wireshark", pty=False)
 
@@ -311,5 +314,16 @@ def build_install_golang():
 	run("curl https://storage.googleapis.com/golang/go1.6.1.linux-armv6l.tar.gz > /tmp/go.tar.gz")
 	run("tar -C /tmp -xzf /tmp/go.tar.gz")
 	sudo("mv /tmp/go /usr/local/go")
+	sudo("ln -s /usr/local/go/bin/go /usr/local/bin/go")
 	put("./resources/bashrc_append.txt","/tmp/bashrc_append.txt")
 	run("cat /tmp/bashrc_append.txt >> ~/.bashrc")
+def build_nextbutton():
+#	run("rm -rf ./next-button")
+#	run("git clone https://github.com/kazuhito-m/next-button.git")
+	with cd("./next-button"):
+		run("env")
+		run("go env")
+#		run("go build", pty=True)
+#		run("chmod 755 ./next-button")
+#	sudo("cp ./next-button/next-button /usr/local/next-button/next-button")
+

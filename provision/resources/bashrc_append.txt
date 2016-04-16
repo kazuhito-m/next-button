@@ -1,3 +1,5 @@
-export GOROOT="/usr/local/go"
-export GOBIN="${GOROOT}/bin"
-export PATH="${GOBIN}:${PATH}"
+export GOROOT=/usr/local/go
+export GO_WORKSPACE=current
+export GOPATH=~/go/third:~/go/${GO_WORKSPACE}
+export PATH=${PATH}:$GOROOT/bin:~/go/third/bin:~/go/${GO_WORKSPACE}/bin
+
