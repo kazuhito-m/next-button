@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# next-button のキッカースクリプト。
+#
+# いくつかの機能、コマンドの結びつけと
+# 並行実行の時間を制御する。
+# (ネットからの取得や、音声ファイルの生成は時間がかかるため)
+
+# 自身のスクリプトのパスを取得する。
+CUR_DIR=$(cd $(dirname $0);pwd)
+TMP_TEXT_FILE=/tmp/next-button.txt
+
+function get-webinfo() {
+	echo 'これはテストデス。' > ${TMP_TEXT_FILE}
+	return $?
+}
+
+# 開始時チャイムを鳴らす
+aplay chime.wav &
+# 実際の情報取得コマンド
+get-webinfo
+
+wait
+
+# 結果判定
+if [ $? -ne 0 ]; then
+	echo "情報の取得にしっぱいしました。" | readalound_text.bsh	
+	return $?
+fi
+
+
+
+# 結果値を
+readalound_text.bsh < ${TMP_TEXT_FILE}
+
+exit 1
