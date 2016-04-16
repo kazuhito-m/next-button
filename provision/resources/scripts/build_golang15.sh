@@ -14,6 +14,6 @@ curl https://storage.googleapis.com/golang/go1.5.1.src.tar.gz | tar xz
 
 ulimit -s 1024    #32bitなので
 cd $WORK_DIR/go/src
-env GO_TEST_TIMEOUT_SCALE=10 GOROOT_BOOTSTRAP=$HOME/go-linux-arm-bootstrap ./all.bash
+env GO_TEST_TIMEOUT_SCALE=10 GOROOT_BOOTSTRAP=$WORK_DIR/go-linux-arm-bootstrap ./all.bash
 
 rm -rf $WORK_DIR/go-linux-arm-bootstrap    #不要なので削除
