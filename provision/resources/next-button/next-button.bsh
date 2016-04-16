@@ -11,8 +11,9 @@ CUR_DIR=$(cd $(dirname $0);pwd)
 LIB_DIR=/usr/local/next-button
 TMP_TEXT_FILE=/tmp/next-button.txt
 
+# golang製のプログラムを叩く。
 function get-webinfo() {
-	echo 'これはテストデス。' > ${TMP_TEXT_FILE}
+	${LIB_DIR}/next-button > ${TMP_TEXT_FILE}
 	return $?
 }
 

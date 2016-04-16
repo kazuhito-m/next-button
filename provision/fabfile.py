@@ -13,7 +13,7 @@ def setup_all():
 #	japanize()
 #	install_openjtalk()
 #	basic_tools_setup()
-#	install_nextbutton()
+	install_nextbutton()
 #	build_install_golang()
 	build_nextbutton()
 	# rename_home_template_dirs()
