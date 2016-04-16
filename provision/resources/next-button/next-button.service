@@ -1,0 +1,10 @@
+[Unit]
+Description=Next Button is "View train info on just time" button service
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/next-button/daemon-next-button.sh
+Restart=always
