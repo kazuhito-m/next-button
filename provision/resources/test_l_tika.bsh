@@ -1,0 +1,20 @@
+#!/bin/bash
+
+GPIO_NO=17
+INTERVAL_SEC=0.25
+GPIO_DIR=/sys/class/gpio
+GPIO_VALUE=${GPIO_DIR}/gpio${GPIO_NO}/value
+
+echo ${GPIO_NO} > /sys/class/gpio/export
+sleep 1
+echo out > ${GPIO_DIR}/gpio${GPIO_NO}/direction
+
+while true ; do
+        sleep ${INTERVAL_SEC}
+        echo 1 > ${GPIO_VALUE}
+        sleep ${INTERVAL_SEC}
+        echo 0 > ${GPIO_VALUE}
+done
+
+echo ${GPIO_NO} > /sys/class/gpio/unexport
+
