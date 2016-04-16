@@ -298,5 +298,10 @@ def install_nextbutton():
 		delete=True
 	)
 	sudo("mv /tmp/next-button/ /usr/local/next-button/")
-	sudo("chmod 755 /usr/local/next-button/next-button.bsh")
+	sudo("chmod 755 /usr/local/next-button/*sh")
 	sudo("ln -s /usr/local/next-button/next-button.bsh /usr/local/bin/next-button")
+	# サービス的にsystemdに登録
+	sudo("cp /usr/local/next-button/next-button.service /etc/systemd/system/next-button.service")
+	sudo("systemctl enable next-button.service")
+	sudo("systemctl stop next-button.service")
+	sudo("systemctl start next-button.service")
