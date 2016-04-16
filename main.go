@@ -6,10 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello World!")
-	// 文字列json化の例
-	json := simplejson.New()
-	json.Set("message", "Hello, World!")
-	b, _ := json.EncodePretty()
-	fmt.Printf("%s\n", b)
+	fmt.Println("ダミー文字列ですが、そのウチ動くはずです。")
 }
