@@ -44,8 +44,29 @@
 - [時刻表検索サイト(APIではないがスクレイピング対象)](http://www.ekikara.jp/top.htm)
 - [カレンダーAPI](http://calendar-service.net/api.php)
 
+
+## Raspberry Pi2 の情報(GPIOまわり)
+
+- [bashだけを使ったLチカ](http://deviceplus.jp/hobby/raspberrypi_entry_009/)
+- [GPIOポート周りの情報](http://qiita.com/aryoa/items/3f6d82b8c63761cef087)
+- [GPIOポート周りの情報その2](http://make.bcde.jp/raspberry-pi/gpio%E3%81%A7led%E3%81%AE%E7%82%B9%E6%BB%85python/)
+- [golangでGPIO弄う方法(未検証)](://github.com/stianeikeland/go-rpio)
+- []()
+- []()
+
 ---
 
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
 - []()
 - []()
 - []()
