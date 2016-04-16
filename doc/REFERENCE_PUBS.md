@@ -56,6 +56,7 @@
 
 ## Linux(Raspabian)周り
 
+- [systemdの解りやすい概要](http://slide.rabbit-shocker.org/authors/sasakyh/EPNetFan2015-06-12/)
 - [systemdの解説](http://enakai00.hatenablog.com/entry/20130917/1379374797)
 - [SDカードの容量最適化](http://yamaryu0508.hatenablog.com/entry/2015/02/03/070000)
 - [言語とタイムゾーンの設定](http://yamaryu0508.hatenablog.com/entry/2014/08/15/140000)
