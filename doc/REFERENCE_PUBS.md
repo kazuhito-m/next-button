@@ -54,6 +54,10 @@
 - []()
 - []()
 
+## Linux(Raspabian)周り
+
+- [systemdの解説](http://enakai00.hatenablog.com/entry/20130917/1379374797)
+
 ---
 
 - []()
