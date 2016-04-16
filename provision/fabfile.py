@@ -307,7 +307,7 @@ def install_nextbutton():
 	sudo("systemctl stop next-button.service")
 	sudo("systemctl start next-button.service")
 def build_install_golang():
-	put("./resources/scripts/build_golang15.sh" "/tmp/build_golang15.sh")
+	put("./resources/scripts/build_golang15.sh","/tmp/build_golang15.sh")
 	run("chmod 755 /tmp/build_golang15.sh")
 	run("/tmp/build_golang15.sh")
 	sudo("mv /tmp/golang/go /opt")
