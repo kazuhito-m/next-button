@@ -1,5 +1,6 @@
 #coding:utf-8
 from fabric.api import local, run, sudo, put, env
+from fabric.context_managers import cd
 
 # 
 # RaspberryPI セットアップ・プロビジョニングソース
@@ -7,8 +8,9 @@ from fabric.api import local, run, sudo, put, env
 # 
 #
 def setup_all():
-	all_upgrade()
-	japanize()
+#	all_upgrade()
+#	japanize()
+	install_openjtalk()
 	# rename_home_template_dirs()
 	# basic_tools_setup()
 	# install_common_tools()
@@ -277,4 +279,17 @@ def insatll_virtualbox():
 # + Amazonの検索とか「余計なお世話」を殺す
 #   + http://ubuntuapps.blog67.fc2.com/blog-entry-695.html
 # + 拡張子から起動するアプリケーションの関連付け
+
 #   + http://pctonitijou.blog.fc2.com/blog-entry-230.html
+
+def install_openjtalk():
+	sudo("apt-get install -y open-jtalk open-jtalk-mecab-naist-jdic hts-voice-nitech-jp-atr503-m001", pty=False)
+	run("mkdir -p ./work")
+	with cd("./work"):
+		run("curl http://heanet.dl.sourceforge.net/project/mmdagent/MMDAgent_Example/MMDAgent_Example-1.6/MMDAgent_Example-1.6.zip > ./voicepack.zip")
+		run("unzip voicepack.zip")
+		sudo("mv ./MMDAgent*/Voice/mei /usr/share/hts-voice/")
+		put("resources/scripts/readalound_text.bsh" , "/tmp/readalound_text.bsh")
+		sudo("mv /tmp/readalound_text.bsh /usr/local/bin/readalound_text.bsh")
+		sudo("chmod 755 /usr/local/bin/readalound_text.bsh")
+	run("rm -rf ./work")
