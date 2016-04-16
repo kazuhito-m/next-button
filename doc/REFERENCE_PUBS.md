@@ -51,18 +51,15 @@
 - [GPIOポート周りの情報](http://qiita.com/aryoa/items/3f6d82b8c63761cef087)
 - [GPIOポート周りの情報その2](http://make.bcde.jp/raspberry-pi/gpio%E3%81%A7led%E3%81%AE%E7%82%B9%E6%BB%85python/)
 - [golangでGPIO弄う方法(未検証)](://github.com/stianeikeland/go-rpio)
-- []()
-- []()
+- [色々なGPIOの実装例](http://netlog.jpn.org/r271-635/2013/01/raspberry_pi_gpio_test.html)
+- []()  
 
 ## Linux(Raspabian)周り
 
 - [systemdの解説](http://enakai00.hatenablog.com/entry/20130917/1379374797)
-
----
-
-- []()
-- []()
-- []()
+- [SDカードの容量最適化](http://yamaryu0508.hatenablog.com/entry/2015/02/03/070000)
+- [言語とタイムゾーンの設定](http://yamaryu0508.hatenablog.com/entry/2014/08/15/140000)
+- [Go1.5のインストール](http://ecoday.jp/1161/raspberry-pi-2%E3%81%ABgo%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E3%80%82/)
 - []()
 - []()
 - []()
