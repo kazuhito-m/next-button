@@ -30,9 +30,7 @@ if [ $res -ne 0 ]; then
 	exit $res
 fi
 
-
-
 # 結果値を
 readalound_text.bsh < ${TMP_TEXT_FILE}
 
-exit 1
+exit 0
