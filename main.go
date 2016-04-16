@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("ダミー文字列ですが、そのウチ動くはずです。")
+	fmt.Println("そのウチ動くはずです。")
 }
