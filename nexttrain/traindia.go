@@ -6,8 +6,8 @@ import (
 
 // 鉄道のダイヤ情報の一つを表す構造体
 type TrainTimeInfo struct {
-	TrainTime       time.Time
-	Destination 	int
+	TrainTime   time.Time
+	Destination int
 }
 
 
