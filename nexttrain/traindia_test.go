@@ -3,7 +3,6 @@ package nexttrain
 import (
 	"testing"
 	"time"
-	"strings"
 )
 
 
@@ -15,9 +14,10 @@ func TestMakeTrainTimeUrl(t *testing.T) {
 	param := DateInfo{}
 	param.Date = targetDate
 
-	actual := MakeTrainTimeUrl(targetDate)
-	
-	if if len(actual) <= 0 {
+
+	actual := MakeTrainTimeUrl(param)
+
+	if len(actual) <= 0 {
 		t.Log("作成したURL")
 		t.Log(actual)
 		t.Errorf("MakeTrainTimeUrl() is faild.")
