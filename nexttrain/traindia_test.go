@@ -92,3 +92,18 @@ func TestMakeTrainTimeUrlHoli(t *testing.T) {
 		t.Errorf("MakeTrainTimeUrl() is faild.URL syntax error.")
 	}
 }
+
+// とある日の平日ダイヤを取得する。
+func TestScrapeTrainTimeInfoBasic(t *testing.T) {
+	// とある平日のダイヤを返すURL
+	const url = "http://www.ekikara.jp/newdata/ekijikoku/2701062/down1_27212011.htm"
+
+	actual := ScrapeTrainTimeInfo(url)
+
+	count := len(actual)
+	if count != 92 {
+		t.Log("取得できたダイヤの要素数")
+		t.Log(count)
+		t.Errorf("ScrapeTrainTimeInfo() is faild.dia count ")
+	}
+}
