@@ -53,3 +53,23 @@ func TestMakeTrainTimeUrlSat(t *testing.T) {
 	}
 }
 
+// 日付によってURLを組み立てる。(日曜日版)
+func TestMakeTrainTimeUrlSun(t *testing.T) {
+
+	targetDate := time.Date(2001, 12, 30, 0, 0, 0, 0, time.Local)
+	param := DateInfo{}
+	param.Date = targetDate
+	param.DayNoOfWeek = 0
+	param.SpecialDay = false
+
+	actual := MakeTrainTimeUrl(param)
+
+	// 日曜日のはずなので、URLのサフィックスは休日用のはず
+	r := regexp.MustCompile(".*_holi.htm")
+	if !r.MatchString(actual) {
+		t.Log("作成したURL")
+		t.Log(actual)
+		t.Errorf("MakeTrainTimeUrl() is faild.URL syntax error.")
+	}
+}
+
