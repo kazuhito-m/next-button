@@ -3,6 +3,7 @@ package nexttrain
 import (
 	"time"
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 )
 
 const train_dia_url string = "http://www.ekikara.jp/newdata/ekijikoku/2701062/down1_27212011%s.htm"
@@ -29,7 +30,19 @@ func GetTrainTimeInfo(targetDate DateInfo) []TrainTimeInfo {
 
 // URLで取得したページの文字列(HTML)から、時刻表情報を取得する。
 func ScrapeTrainTimeInfo(url string) []TrainTimeInfo {
-	println(url)
+
+	// URLからWEBページ取ってくる
+	doc, _ := goquery.NewDocument(url)
+	doc.Find(".lowBg01").Each(func(_ int, s *goquery.Selection) {
+		s.Find("table > tbody > tr").Each(func(_ int, s2 *goquery.Selection) {
+			fmt.Println("---------------------------------------------------------------------------------------------")
+			s2.Find("tr > .lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
+				fmt.Println("２段目---------------------------------------------------------------------------------------------")
+				fmt.Println(s3.Html())
+			})
+		})
+	})
+
 	return []TrainTimeInfo{}
 }
 
