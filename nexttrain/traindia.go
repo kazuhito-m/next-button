@@ -39,6 +39,7 @@ func ScrapeTrainTimeInfo(url string) []TrainTimeInfo {
 			s2.Find("tr > .lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
 				fmt.Println("２段目---------------------------------------------------------------------------------------------")
 				fmt.Println(s3.Html())
+				fmt.Println("２段目end------------------------------------------------------------------------------------------")
 			})
 		})
 	})
