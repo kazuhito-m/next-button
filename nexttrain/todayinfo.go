@@ -96,9 +96,9 @@ func EqualDateOnly(src time.Time, dest time.Time) bool {
 
 func GetNow() time.Time {
 	if (TestMode) {
-		return time.Now()
-	} else {
 		return TodayForTest
+	} else {
+		return time.Now()
 	}
 }
 

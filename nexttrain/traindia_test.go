@@ -151,9 +151,9 @@ func TestGetNextTrainTimeInfo(t *testing.T) {
 	const expect = 5
 
 	TestMode = true
-	TodayForTest = time.Date(2016, 04, 23, 23, 59, 58, 0, time.Local)
+	TodayForTest = time.Date(2016, 04, 23, 23, 30, 58, 0, time.Local)
 
-	actual := GetNextTrainTimeInfo(5)
+	actual := GetNextTrainTimeInfo(expect)
 
 	count := len(actual)
 	if count != expect {

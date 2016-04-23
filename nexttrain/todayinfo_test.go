@@ -134,13 +134,15 @@ func TestGetDay(t *testing.T) {
 
 	actual := GetDay(-1)
 
-	if actual.Year() == 2014 && actual.Month() == 12 && actual.Day() == 19 {
+	if !(actual.Year() == 2014 && actual.Month() == 12 && actual.Day() == 19) {
+		t.Log(actual)
 		t.Errorf("GetDay() is faild. -1.")
 	}
 
 	actual = GetDay(1)
 
-	if actual.Year() == 2014 && actual.Month() == 12 && actual.Day() == 21 {
+	if !(actual.Year() == 2014 && actual.Month() == 12 && actual.Day() == 21) {
+		t.Log(actual)
 		t.Errorf("GetDay() is faild. +1.")
 	}
 
