@@ -105,6 +105,6 @@ func TestScrapeTrainTimeInfoBasic(t *testing.T) {
 	if count != 92 {
 		t.Log("取得できたダイヤの要素数")
 		t.Log(count)
-		t.Errorf("ScrapeTrainTimeInfo() is faild.dia count ")
+		t.Errorf("ScrapeTrainTimeInfo() is faild.dia count %d but %d" ,92 , count	)
 	}
 }

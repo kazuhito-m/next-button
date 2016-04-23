@@ -31,33 +31,36 @@ func GetTrainTimeInfo(targetDate DateInfo) []TrainTimeInfo {
 
 // URLで取得したページの文字列(HTML)から、時刻表情報を取得する。
 func ScrapeTrainTimeInfo(url string, targetDate time.Time) []TrainTimeInfo {
+	infos := []TrainTimeInfo{}
 	// URLからWEBページ取ってくる
 	doc, _ := goquery.NewDocument(url)
 	doc.Find(".lowBg01").Each(func(_ int, s *goquery.Selection) {
 		s.Find("table > tbody > tr").Each(func(_ int, s2 *goquery.Selection) {
 			// 時、取得
 			var hour int = 0
-			s2.Find(".lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
+			s2.Find(".lowBg06 > .l").Each(func(_ int, s3 *goquery.Selection) {
 				var hourStr = s3.Text()
-				hour,_  = strconv.Atoi(hourStr)
+				hour, _ = strconv.Atoi(hourStr)
 			})
 			if hour == 0 {
 				return
 			}
 			// 分、取得。
-			s2.Find(".lowBg12 > .ll > .textBold").Each(func(_ int, s3 *goquery.Selection) {
-				var minStr = s3.Text()
-				fmt.Println(minStr)
+			td := targetDate
+			s2.Find(".ll").Each(func(_ int, s4 *goquery.Selection) {
+				var min , _ = strconv.Atoi(s4.Text())
+				tti := TrainTimeInfo{}
+				tti.TrainTime = time.Date(td.Year(), td.Month(), td.Day(), hour, min, 0, 0, time.Local)
+				infos = append(infos, tti)
 			})
 		})
 	})
-
-	return []TrainTimeInfo{}
+	return infos
 }
 
 // 指定された日付情報から、時刻表のページのURLを組み立てる。
 func MakeTrainTimeUrl(targetDate DateInfo) string {
-	diaSufix := ""	//
+	diaSufix := ""    //
 	// まず、日曜or休日なら
 	if (targetDate.SpecialDay || targetDate.DayNoOfWeek == 0) {
 		diaSufix = "_holi"
