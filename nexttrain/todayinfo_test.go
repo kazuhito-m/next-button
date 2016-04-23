@@ -151,7 +151,7 @@ func TestGetTodayInfo(t *testing.T) {
 	TestMode = true
 	TodayForTest = time.Date(2016, 04, 24, 23, 59, 58, 0, time.Local)
 
-	actual := GetTodayInfo(0)
+	actual := GetTodayInfo()
 
 	if actual.Date.Day() != 24 {
 		t.Errorf("TestGetTodayInfo() is faild. Day is not 24")
@@ -174,7 +174,7 @@ func TestGetTodayInfoForHolyday(t *testing.T) {
 	TestMode = true
 	TodayForTest = time.Date(2016, 04, 24, 23, 59, 58, 0, time.Local)
 
-	actual := GetTodayInfo(5)    // 昭和の日設定
+	actual := GetDayInfo(5)    // 昭和の日設定
 
 	if actual.Date.Day() != 29 {
 		t.Errorf("TestGetTodayInfo() is faild. Day is not 29")

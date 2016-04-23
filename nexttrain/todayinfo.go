@@ -110,14 +110,21 @@ func GetDay(offset int) time.Time {
 	return now
 }
 
-func GetTodayInfo(dayOffset int) DateInfo {
+// 本日の「日付情報」をDateInfo型で取得する。
+// offsetを指定することにより前後の日も取得可能
+func GetDayInfo(dayOffset int) DateInfo {
 	day := GetDay(dayOffset)
 	dateInfos := ConvDateInfosByCsv(GetCalenderInfoCsv(day))
 	// カレンダー情報をまわし、同じ日なら返す
-	for _ , hitTest := range dateInfos {
-		if EqualDateOnly(hitTest.Date , day) {
+	for _, hitTest := range dateInfos {
+		if EqualDateOnly(hitTest.Date, day) {
 			return hitTest
 		}
 	}
 	return DateInfo{}
+}
+
+// 本日の「日付情報」をDateInfo型で取得する。
+func GetTodayInfo() DateInfo {
+	return GetDayInfo(0)
 }
