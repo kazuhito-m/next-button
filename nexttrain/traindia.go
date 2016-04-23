@@ -44,10 +44,10 @@ func ScrapeTrainTimeInfo(url string, targetDate time.Time) []TrainTimeInfo {
 			if hour == 0 {
 				return
 			}
-			fmt.Println(hour)
-			s2.Find("tr > .lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
-				var hourStr = s3.Text()
-				hour,_  = strconv.Atoi(hourStr)
+			// 分、取得。
+			s2.Find(".lowBg12 > .ll > .textBold").Each(func(_ int, s3 *goquery.Selection) {
+				var minStr = s3.Text()
+				fmt.Println(minStr)
 			})
 		})
 	})
