@@ -18,8 +18,34 @@ type TrainTimeInfo struct {
 
 
 // 「次の電車」情報の束を取得する。
-func GetNextTrainTimeInfo() []TrainTimeInfo {
-	return []TrainTimeInfo{}
+func GetNextTrainTimeInfo(count int) []TrainTimeInfo {
+	result := []TrainTimeInfo{}
+	// 必要な限りのダイヤデータを取得
+	infos := GetTrainTimeInfoFullRange()
+	// 全て回しながら、「指定の時刻を上回った」ら、戻り値用の配列に足す。
+	nowTime := GetNow()
+	i := 0
+	for _ , info := range infos {
+		if i > 0 || info.TrainTime.After(nowTime) {
+			i++
+			result = append(result,info)
+			if i >= count {
+				break
+			}
+		}
+	}
+	return result
+}
+
+// 「次の電車」を判定するのに十分なダイヤ情報を取得する
+// (今は前後一日分のダイヤデータを取得する。)
+func GetTrainTimeInfoFullRange() []TrainTimeInfo {
+	totalInfos := []TrainTimeInfo{}
+	for i := -1; i < 2; i++ {
+		infos := GetTrainTimeInfo(GetDayInfo(i))
+		totalInfos = append(totalInfos, infos...)    // 配列の結合(...記号)
+	}
+	return totalInfos
 }
 
 // 「指定日の時刻情報」を束で取得する。

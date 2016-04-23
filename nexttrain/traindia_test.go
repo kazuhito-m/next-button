@@ -127,3 +127,38 @@ func TestGetTrainTimeInfo(t *testing.T) {
 		t.Errorf("GetTrainTimeInfo() is faild.dia count %d but %d", 92, count)
 	}
 }
+
+// 判定用のダイヤ情報(当日から前後一日、計三日間)を取得する。
+func TestGetTrainTimeInfoFullRange(t *testing.T) {
+
+	TestMode = true
+	TodayForTest = time.Date(2016, 04, 24, 23, 59, 58, 0, time.Local)
+
+	actual := GetTrainTimeInfoFullRange()
+
+	const expect = 266
+	count := len(actual)
+	if count != expect {
+		t.Log("取得できたダイヤの要素数")
+		t.Log(count)
+		t.Errorf("GetTrainTimeInfo() is faild.dia count %d but %d", expect, count)
+	}
+}
+
+// 「現在」より後の「指定した個数分」のダイヤを取ってくる
+func TestGetNextTrainTimeInfo(t *testing.T) {
+
+	const expect = 5
+
+	TestMode = true
+	TodayForTest = time.Date(2016, 04, 23, 23, 59, 58, 0, time.Local)
+
+	actual := GetNextTrainTimeInfo(5)
+
+	count := len(actual)
+	if count != expect {
+		t.Log("取得できたダイヤの要素数")
+		t.Log(count)
+		t.Errorf("GetNextTrainTimeInfo() is faild.dia count %d but %d", expect, count)
+	}
+}
