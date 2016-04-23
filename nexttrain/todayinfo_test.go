@@ -127,3 +127,65 @@ func TestEqualDateOnlyNotEqual(t *testing.T) {
 	}
 }
 
+func TestGetDay(t *testing.T) {
+
+	TestMode = true
+	TodayForTest = time.Date(2014, 12, 20, 23, 59, 58, 0, time.Local)
+
+	actual := GetDay(-1)
+
+	if actual.Year() == 2014 && actual.Month() == 12 && actual.Day() == 19 {
+		t.Errorf("GetDay() is faild. -1.")
+	}
+
+	actual = GetDay(1)
+
+	if actual.Year() == 2014 && actual.Month() == 12 && actual.Day() == 21 {
+		t.Errorf("GetDay() is faild. +1.")
+	}
+
+}
+
+func TestGetTodayInfo(t *testing.T) {
+
+	TestMode = true
+	TodayForTest = time.Date(2016, 04, 24, 23, 59, 58, 0, time.Local)
+
+	actual := GetTodayInfo(0)
+
+	if actual.Date.Day() != 24 {
+		t.Errorf("TestGetTodayInfo() is faild. Day is not 24")
+	}
+
+	if actual.DayNoOfWeek != 0 {
+		t.Errorf("TestGetTodayInfo() is faild. Week day number not Sunday.")
+	}
+
+	if actual.SpecialDay {
+		t.Errorf("TestGetTodayInfo() is faild. Special day is faild.")
+	}
+
+}
+
+
+// 日の情報を取得する(祝日版)
+func TestGetTodayInfoForHolyday(t *testing.T) {
+
+	TestMode = true
+	TodayForTest = time.Date(2016, 04, 24, 23, 59, 58, 0, time.Local)
+
+	actual := GetTodayInfo(5)    // 昭和の日設定
+
+	if actual.Date.Day() != 29 {
+		t.Errorf("TestGetTodayInfo() is faild. Day is not 29")
+	}
+
+	if actual.DayNoOfWeek != 5 {
+		t.Errorf("TestGetTodayInfo() is faild. Week day number not Sunday.")
+	}
+
+	if !actual.SpecialDay {
+		t.Errorf("TestGetTodayInfo() is faild. Special day is faild.")
+	}
+
+}

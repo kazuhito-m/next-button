@@ -23,6 +23,10 @@ type DateInfo struct {
 	SpecialDay  bool
 }
 
+// テスト用の「当日」
+var TestMode = false
+var TodayForTest time.Time
+
 
 func GetCalenderInfoCsv(target time.Time) string {
 
@@ -43,10 +47,10 @@ func MakeApiUrlByDate(target time.Time) string {
 }
 
 func ConvDateInfosByCsv(csvText string) []DateInfo {
-	// 配列を作成
-	dateInfos := []DateInfo{}
 	// 一行ずつカンマ区切りを処理
 	csvReader := csv.NewReader(strings.NewReader(csvText))
+	// 配列を作成
+	dateInfos := []DateInfo{}
 
 	isFirst := true
 	for {
@@ -88,4 +92,32 @@ func TruncateHms(src time.Time) time.Time {
 // ２つの時刻変数の日付だけを取り出して同一か判定する
 func EqualDateOnly(src time.Time, dest time.Time) bool {
 	return TruncateHms(src).Equal(TruncateHms(dest))
+}
+
+func GetNow() time.Time {
+	if (TestMode) {
+		return time.Now()
+	} else {
+		return TodayForTest
+	}
+}
+
+func GetDay(offset int) time.Time {
+	now := GetNow()
+	if (offset != 0) {
+		now = now.AddDate(0, 0, offset)
+	}
+	return now
+}
+
+func GetTodayInfo(dayOffset int) DateInfo {
+	day := GetDay(dayOffset)
+	dateInfos := ConvDateInfosByCsv(GetCalenderInfoCsv(day))
+	// カレンダー情報をまわし、同じ日なら返す
+	for _ , hitTest := range dateInfos {
+		if EqualDateOnly(hitTest.Date , day) {
+			return hitTest
+		}
+	}
+	return DateInfo{}
 }
