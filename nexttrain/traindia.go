@@ -37,7 +37,7 @@ func ScrapeTrainTimeInfo(url string, targetDate time.Time) []TrainTimeInfo {
 		s.Find("table > tbody > tr").Each(func(_ int, s2 *goquery.Selection) {
 			// 時、取得
 			var hour int = 0
-			s2.Find("tr > .lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
+			s2.Find(".lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
 				var hourStr = s3.Text()
 				hour,_  = strconv.Atoi(hourStr)
 			})
@@ -45,6 +45,10 @@ func ScrapeTrainTimeInfo(url string, targetDate time.Time) []TrainTimeInfo {
 				return
 			}
 			fmt.Println(hour)
+			s2.Find("tr > .lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
+				var hourStr = s3.Text()
+				hour,_  = strconv.Atoi(hourStr)
+			})
 		})
 	})
 
