@@ -4,6 +4,7 @@ import (
 	"time"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+	"strconv"
 )
 
 const train_dia_url string = "http://www.ekikara.jp/newdata/ekijikoku/2701062/down1_27212011%s.htm"
@@ -29,18 +30,21 @@ func GetTrainTimeInfo(targetDate DateInfo) []TrainTimeInfo {
 }
 
 // URLで取得したページの文字列(HTML)から、時刻表情報を取得する。
-func ScrapeTrainTimeInfo(url string) []TrainTimeInfo {
-
+func ScrapeTrainTimeInfo(url string, targetDate time.Time) []TrainTimeInfo {
 	// URLからWEBページ取ってくる
 	doc, _ := goquery.NewDocument(url)
 	doc.Find(".lowBg01").Each(func(_ int, s *goquery.Selection) {
 		s.Find("table > tbody > tr").Each(func(_ int, s2 *goquery.Selection) {
-			fmt.Println("---------------------------------------------------------------------------------------------")
+			// 時、取得
+			var hour int = 0
 			s2.Find("tr > .lowBg06 > .l > .textBold").Each(func(_ int, s3 *goquery.Selection) {
-				fmt.Println("２段目---------------------------------------------------------------------------------------------")
-				fmt.Println(s3.Html())
-				fmt.Println("２段目end------------------------------------------------------------------------------------------")
+				var hourStr = s3.Text()
+				hour,_  = strconv.Atoi(hourStr)
 			})
+			if hour == 0 {
+				return
+			}
+			fmt.Println(hour)
 		})
 	})
 

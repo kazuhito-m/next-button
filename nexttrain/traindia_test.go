@@ -97,8 +97,9 @@ func TestMakeTrainTimeUrlHoli(t *testing.T) {
 func TestScrapeTrainTimeInfoBasic(t *testing.T) {
 	// とある平日のダイヤを返すURL
 	const url = "http://www.ekikara.jp/newdata/ekijikoku/2701062/down1_27212011.htm"
+	targetDate := time.Date(2002, 1, 1, 0, 0, 0, 0, time.Local)
 
-	actual := ScrapeTrainTimeInfo(url)
+	actual := ScrapeTrainTimeInfo(url, targetDate)
 
 	count := len(actual)
 	if count != 92 {
