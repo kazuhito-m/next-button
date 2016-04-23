@@ -105,6 +105,25 @@ func TestScrapeTrainTimeInfoBasic(t *testing.T) {
 	if count != 92 {
 		t.Log("取得できたダイヤの要素数")
 		t.Log(count)
-		t.Errorf("ScrapeTrainTimeInfo() is faild.dia count %d but %d" ,92 , count	)
+		t.Errorf("ScrapeTrainTimeInfo() is faild.dia count %d but %d", 92, count)
+	}
+}
+
+// とある日の平日ダイヤを日付していだけで取得する。
+func TestGetTrainTimeInfo(t *testing.T) {
+
+	targetDate := time.Date(2001, 12, 31, 0, 0, 0, 0, time.Local)
+	param := DateInfo{}
+	param.Date = targetDate
+	param.DayNoOfWeek = 1
+	param.SpecialDay = false
+
+	actual := GetTrainTimeInfo(param)
+
+	count := len(actual)
+	if count != 92 {
+		t.Log("取得できたダイヤの要素数")
+		t.Log(count)
+		t.Errorf("GetTrainTimeInfo() is faild.dia count %d but %d", 92, count)
 	}
 }

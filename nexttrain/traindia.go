@@ -24,9 +24,10 @@ func GetNextTrainTimeInfo() []TrainTimeInfo {
 
 // 「指定日の時刻情報」を束で取得する。
 func GetTrainTimeInfo(targetDate DateInfo) []TrainTimeInfo {
-	// 仮実装
-	println(targetDate.Date.String())
-	return []TrainTimeInfo{}
+	// 日付からURLを作成
+	url := MakeTrainTimeUrl(targetDate)
+	// ダイヤデータを取得、分解し束で返す
+	return ScrapeTrainTimeInfo(url, targetDate.Date)
 }
 
 // URLで取得したページの文字列(HTML)から、時刻表情報を取得する。
