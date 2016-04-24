@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// 「ダイヤのデータをスクレイピングする」サイトのURL。
 const train_dia_url string = "http://www.ekikara.jp/newdata/ekijikoku/2701062/down1_27212011%s.htm"
 
 
