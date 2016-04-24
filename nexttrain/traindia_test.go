@@ -161,4 +161,12 @@ func TestGetNextTrainTimeInfo(t *testing.T) {
 		t.Log(count)
 		t.Errorf("GetNextTrainTimeInfo() is faild.dia count %d but %d", expect, count)
 	}
+
+	// 「何分後か」が計算できているか検査
+	const minutes = 1	// 一分後を案内されても、乗れないだろなぁ。
+	actMinutes := actual[0].Destination
+	if actMinutes != minutes {
+		t.Errorf("GetNextTrainTimeInfo() is faild. first dia destination is %d, but %d", expect, actMinutes)
+	}
+
 }

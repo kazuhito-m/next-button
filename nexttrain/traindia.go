@@ -28,6 +28,8 @@ func GetNextTrainTimeInfo(count int) []TrainTimeInfo {
 	for _ , info := range infos {
 		if i > 0 || info.TrainTime.After(nowTime) {
 			i++
+			// 現在の時間からの「何分先か？」を算出
+			info.Destination = GetDistinationMinutes(nowTime,info.TrainTime)
 			result = append(result,info)
 			if i >= count {
 				break
@@ -93,4 +95,17 @@ func MakeTrainTimeUrl(targetDate DateInfo) string {
 		diaSufix = "_sat"
 	} // それ以外はなにもつけなくてよし。
 	return fmt.Sprintf(train_dia_url, diaSufix)
+}
+
+// ２つの時間が「何分差か」を数値で返す。ｋ
+func GetDistinationMinutes(src time.Time , dest time.Time) int {
+	// 引き算し…
+	resTime := dest.Sub(src)
+	// それを分に治す
+	return GetTotalMinits(resTime)
+}
+
+// 「時間差」オブジェクトから、「述べ何分」かを取得する。
+func GetTotalMinits(duration time.Duration) int {
+	return int(duration.Hours()) * 60 + int(duration.Minutes())
 }
