@@ -16,6 +16,8 @@
 - [型キャストの原則](http://qiita.com/atsaki/items/3554f5a0609c59a3e10d)
 - [リフレクションのマニュアル](https://golang.org/pkg/reflect/#Value.Convert)
 - [配列の要素数を取得する](http://ashitani.jp/golangtips/tips_slice.html#slice_Count)
+- [配列同士の結合](http://qiita.com/kazuph/items/4bc33162da7e7d00d80c)
+- [制御構造](http://qiita.com/high5/items/3fe34d2feeff2c11f5ca)
 
 ### テスト周り
 
@@ -38,6 +40,10 @@
 ### CSV周り
 
 - [csv分解](http://www.laddy.info/2014/09/28000/)
+
+### スクレイピング
+
+-[goquery](http://qiita.com/yosuke_furukawa/items/5fd41f5bcf53d0a69ca6)
 
 ## 外部API関連
 
